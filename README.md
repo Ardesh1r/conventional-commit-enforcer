@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.svg" width="120" alt="Conventional Commit Enforcer logo" />
+  <img src="banner.svg" width="100%" alt="Conventional Commit Enforcer" />
 </p>
 
 # Conventional Commit Enforcer
