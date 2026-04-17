@@ -1,0 +1,48 @@
+name: 'Conventional Commit Enforcer'
+description: 'Validates that all commit messages in a push or pull request follow the Conventional Commits specification.'
+author: 'Ardesh1r'
+
+branding:
+  icon: 'check-circle'
+  color: 'green'
+
+inputs:
+  token:
+    description: 'GitHub token used to read PR commits and post comments.'
+    required: false
+    default: '${{ github.token }}'
+
+  types:
+    description: 'Comma-separated list of allowed commit types.'
+    required: false
+    default: 'feat,fix,chore,docs,style,refactor,perf,test,build,ci,revert'
+
+  require-scope:
+    description: 'Set to "true" to require a scope in every commit message.'
+    required: false
+    default: 'false'
+
+  scope-pattern:
+    description: 'Regex pattern for valid scope names (e.g. "[a-z]+" for lowercase only).'
+    required: false
+    default: '[a-zA-Z0-9_.\-]+'
+
+  ignore-merge-commits:
+    description: 'Set to "false" to also validate merge commits.'
+    required: false
+    default: 'true'
+
+  post-comment:
+    description: 'Set to "false" to disable posting a PR comment on failure.'
+    required: false
+    default: 'true'
+
+outputs:
+  valid:
+    description: '"true" if all commits are valid, "false" otherwise.'
+  failing-commits:
+    description: 'Newline-separated list of SHAs that failed validation.'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
